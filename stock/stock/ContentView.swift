@@ -28,35 +28,37 @@ struct Home: View {
     @State var text: String = ""
     @State var isHide = false
     @State var tapTextField = false
-
+    
     var datamodel = DataModel()
     
     var body: some View{
-        
         VStack(spacing: 0){
             if !isHide{
                 SearchBar( text: $text, index: $index)
             }
             ZStack{
-                if !tapTextField && text.isEmpty{
+                if !tapTextField && text.isEmpty{ // when user presses on search field
                     PopularQueries().opacity(self.index == 2 ? 1 : 0)
                 }
                 if !(self.index == 2) || !text.isEmpty {
-                    VStack{
+                    VStack{ // depending on the index of view
                         segmentedView(index: $index)
                         ZStack{
+                            // view with all stocks from json
                             Stocks(text: $text, isHide: $isHide).opacity(self.index == 0 ? 1 : 0)
                                 .environmentObject(datamodel)
-                            
+                            // view with your favorite stocks
                             Favorites().opacity(self.index == 1 ? 1 : 0)
                                 .environmentObject(datamodel)
                         }
                     }
+                    
                 }
             }
             
         }
         .edgesIgnoringSafeArea(.top)
+        
     }
 }
 

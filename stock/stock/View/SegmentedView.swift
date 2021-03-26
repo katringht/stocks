@@ -8,6 +8,8 @@
 import SwiftUI
 
 
+// Custom segmented controller 
+
 struct segmentedView: View {
     @Binding var index: Int
     var body: some View{

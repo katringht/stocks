@@ -1,11 +1,6 @@
-//
-//  PopularQueriesView.swift
-//  stocks
-//
-//  Created by Ekaterina Tarasova on 19.03.2021.
-//
-
 import SwiftUI
+// view when user presses on search field
+// simple view without loading json or any data
 
 struct PopularQueries: View {
     var popular = ["Wix.com", "Blooming", "Vistra", "LKQ", "Porshe"]

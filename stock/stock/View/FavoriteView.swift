@@ -15,6 +15,7 @@ struct Favorites: View {
     
     var body: some View{
         VStack{
+            // data from Realm data base
             ForEach (datamodel.models){ item in
                 VStack {
                     HStack{
@@ -32,7 +33,7 @@ struct Favorites: View {
                                     .font(Font.custom("Hiragino Sans W6", size: 15))
                                 Button(action: {
                                     withAnimation(){
-                                        datamodel.deleteData(obj: item)
+                                        datamodel.deleteData(obj: item) // deleting data from database
                                     }
                                 }) {
                                     Image(systemName: "star.fill")
@@ -58,7 +59,6 @@ struct Favorites: View {
                     .padding(.vertical, 10)
                     .padding(.horizontal, 10)
                     .background(Color(.systemGray6))
-//                    .background(item % 2 == 1 ? Color.yellow : Color.gray)
                     .cornerRadius(17.0)
                     
                 }

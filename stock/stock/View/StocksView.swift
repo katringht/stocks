@@ -16,11 +16,13 @@ struct Stocks: View {
     @Binding var text : String
     @Binding var isHide: Bool
     @EnvironmentObject var datamodel: DataModel
-
+    
     
     var body: some View {
         ScrollView(.vertical) {
             VStack(spacing: 0 ){
+                
+                // for dinamic search bar when user scroll
                 GeometryReader{ reader -> AnyView in
                     let yAxis = reader.frame(in: .global).minY
                     
@@ -46,8 +48,12 @@ struct Stocks: View {
                 }
                 .frame(width: 0, height: 0)
                 
+                // stock cells
+                
                 ForEach(stockSearchText(), id: \.self){ i in
+                    
                     VStack {
+                        
                         HStack{
                             ZStack{
                                 Image("fon")
@@ -60,11 +66,13 @@ struct Stocks: View {
                                 HStack{
                                     Text(i.symbol)
                                         .font(Font.custom("Hiragino Sans W6", size: 15))
+                                        .foregroundColor(.black)
                                     StarButton(text: i.symbol, subtitle: i.longName, regular: "\(i.regularMarketPrice)", change: "\(i.regularMarketDayRange)")
                                         .environmentObject(datamodel)
                                 }
                                 Text(i.longName).font(.caption)
                                     .font(Font.custom("Hiragino Sans W6", size: 18))
+                                    .foregroundColor(.black)
                             }
                             
                             Spacer()
@@ -86,19 +94,19 @@ struct Stocks: View {
                         .padding(.vertical, 10)
                         .padding(.horizontal, 10)
                         .background(Color(.systemGray6))
-//                        .background(i % 2 == 1 ? Color.yellow : Color.gray)
                         .cornerRadius(17.0)
                     }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 10)
-                    
                 }
+                .padding(.vertical, 5)
+                .padding(.horizontal, 10)
             }
-            
         }
+        
+        
         .onAppear(perform: loadData)
     }
     
+    // json parser
     func loadData() {
         guard let url = URL(string: "https://mboum.com/api/v1/co/collections/?list=day_gainers&start=1&apikey=demo") else {
             print("Invalid URL")
@@ -111,7 +119,6 @@ struct Stocks: View {
                     DispatchQueue.main.async {
                         // update our UI
                         self.stock = decodedResponse.quotes
-                        
                     }
                     return
                 }
@@ -120,9 +127,9 @@ struct Stocks: View {
         }.resume()
     }
     
+    //func for searching
     func stockSearchText() -> [Stock] {
         return stock.filter({ text.isEmpty ? true : $0.longName.contains(text) })
     }
 }
-
 

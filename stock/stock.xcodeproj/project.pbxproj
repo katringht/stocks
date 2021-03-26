@@ -21,6 +21,7 @@
 		21CAF746260E038600265473 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 21CAF745260E038600265473 /* RealmSwift */; };
 		21CAF74A260E03A400265473 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CAF749260E03A400265473 /* Model.swift */; };
 		21CAF74D260E03DF00265473 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CAF74C260E03DF00265473 /* DataModel.swift */; };
+		21CAF757260E38B300265473 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 21CAF756260E38B300265473 /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21CAF757260E38B300265473 /* SwiftUICharts in Frameworks */,
 				21CAF746260E038600265473 /* RealmSwift in Frameworks */,
 				21CAF744260E038600265473 /* Realm in Frameworks */,
 			);
@@ -132,6 +134,7 @@
 			packageProductDependencies = (
 				21CAF743260E038600265473 /* Realm */,
 				21CAF745260E038600265473 /* RealmSwift */,
+				21CAF756260E38B300265473 /* SwiftUICharts */,
 			);
 			productName = stock;
 			productReference = 21CAF720260E031600265473 /* stock.app */;
@@ -162,6 +165,7 @@
 			mainGroup = 21CAF717260E031600265473;
 			packageReferences = (
 				21CAF742260E038600265473 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				21CAF755260E38B300265473 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 21CAF721260E031600265473 /* Products */;
 			projectDirPath = "";
@@ -397,6 +401,14 @@
 				minimumVersion = 10.7.2;
 			};
 		};
+		21CAF755260E38B300265473 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -409,6 +421,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 21CAF742260E038600265473 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		21CAF756260E38B300265473 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 21CAF755260E38B300265473 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

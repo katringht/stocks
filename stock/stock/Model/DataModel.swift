@@ -27,6 +27,7 @@ class DataModel: ObservableObject {
         
     }
     
+    // func for adding data to database
     func addData(title: String, detail: String, change: String, regular: String) {
         
         let model = Model()
@@ -38,39 +39,16 @@ class DataModel: ObservableObject {
         //getting refrence
         
         guard let dbRef = try? Realm()  else {return}
-        //проверка на наличие в бд
+        
         //writing data
-//        let existingStock = dbRef.object(ofType: Model.self, forPrimaryKey: Model.primaryKey())
         do {
-//            if let existingStock = dbRef.object(ofType: Model.self, forPrimaryKey: Model.primaryKey()){
-//                
-//            } else {
-                try? dbRef.write{
-                    
-                    dbRef.add(model, update: .all)
-                    //updating ui
-                    fetchData()
-                }
-//            }
+            try? dbRef.write{
+                
+                dbRef.add(model, update: .all)
+                //updating ui
+                fetchData()
+            }
         }
-    }
-
-//    func isFavorite() {
-//        let model = Model()
-//        model.isFavorite = isFavorite
-//        guard let dbRef = try? Realm()  else {return}
-//        try! dbRef.write {
-//            isFavorite = !isFavorite
-//        }
-//        fetchData()
-//
-//    }
-    
-    func toggleCompleted() {
-    guard let dbRef = try? Realm()  else {return}
-      try! dbRef.write {
-        isFavorite = !isFavorite
-      }
     }
     
     func deleteData(obj: Model) {
@@ -78,19 +56,6 @@ class DataModel: ObservableObject {
         
         try? dbRef.write{
             dbRef.delete(obj)
-            
-            fetchData()
-        }
-    }
-    
-    func deleteDatabyTitle(title: String) {
-        
-        let model = Model()
-        model.title = title
-        guard let dbRef = try? Realm()  else {return}
-        
-        try? dbRef.write{
-            
             
             fetchData()
         }

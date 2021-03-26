@@ -8,6 +8,8 @@
 import SwiftUI
 import RealmSwift
 
+// model for database
+
 class Model: Object, Identifiable {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var title = ""
