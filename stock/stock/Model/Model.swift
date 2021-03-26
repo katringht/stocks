@@ -1,18 +1,23 @@
 //
 //  Model.swift
-//  app_stock
+//  stock
 //
-//  Created by Ekaterina Tarasova on 23.03.2021.
+//  Created by Ekaterina Tarasova on 26.03.2021.
 //
 
 import SwiftUI
 import RealmSwift
 
 class Model: Object, Identifiable {
-    @objc dynamic var id: Date = Date()
+    @objc dynamic var id = UUID().uuidString
     @objc dynamic var title = ""
     @objc dynamic var detail = ""
     @objc dynamic var regularprice = ""
     @objc dynamic var pricechange = ""
     @objc dynamic var isFavorite = false
+    
+    
+    override class func primaryKey() -> String? {
+        return "title"
+    }
 }

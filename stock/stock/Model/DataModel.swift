@@ -2,7 +2,7 @@
 //  DataModel.swift
 //  stocks
 //
-//  Created by Ekaterina Tarasova on 23.03.2021.
+//  Created by Ekaterina Tarasova on 26.03.2021.
 //
 
 import SwiftUI
@@ -10,7 +10,6 @@ import RealmSwift
 
 class DataModel: ObservableObject {
     @Published var models: [Model] = []
-    @Published var updateObject : Model?
     @Published var isFavorite = false
     
     init() {
@@ -39,25 +38,39 @@ class DataModel: ObservableObject {
         //getting refrence
         
         guard let dbRef = try? Realm()  else {return}
-        
+        //проверка на наличие в бд
         //writing data
-        try? dbRef.write{
-            dbRef.add(model)
-            
-            //updating ui
-            fetchData()
+//        let existingStock = dbRef.object(ofType: Model.self, forPrimaryKey: Model.primaryKey())
+        do {
+//            if let existingStock = dbRef.object(ofType: Model.self, forPrimaryKey: Model.primaryKey()){
+//                
+//            } else {
+                try? dbRef.write{
+                    
+                    dbRef.add(model, update: .all)
+                    //updating ui
+                    fetchData()
+                }
+//            }
         }
     }
-    
-    func isFavorite(isFavorite: Bool) {
+
+//    func isFavorite() {
 //        let model = Model()
 //        model.isFavorite = isFavorite
-        guard let dbRef = try? Realm()  else {return}
-          try! dbRef.write {
-            self.isFavorite = !isFavorite
-          }
+//        guard let dbRef = try? Realm()  else {return}
+//        try! dbRef.write {
+//            isFavorite = !isFavorite
+//        }
 //        fetchData()
-        
+//
+//    }
+    
+    func toggleCompleted() {
+    guard let dbRef = try? Realm()  else {return}
+      try! dbRef.write {
+        isFavorite = !isFavorite
+      }
     }
     
     func deleteData(obj: Model) {
@@ -70,15 +83,18 @@ class DataModel: ObservableObject {
         }
     }
     
-//    func setUpInitialData(){
-//
-//        // Updation...
-//
-//        guard let updateData = updateObject else{return}
-//
-//        // Checking if it's update object and assigning values...
-//        title = updateData.title
-//        detail = updateData.detail
-//    }
+    func deleteDatabyTitle(title: String) {
+        
+        let model = Model()
+        model.title = title
+        guard let dbRef = try? Realm()  else {return}
+        
+        try? dbRef.write{
+            
+            
+            fetchData()
+        }
+    }
     
 }
+

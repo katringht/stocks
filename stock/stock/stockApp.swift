@@ -1,14 +1,14 @@
 //
-//  app_stockApp.swift
-//  app_stock
+//  stockApp.swift
+//  stock
 //
-//  Created by Ekaterina Tarasova on 23.03.2021.
+//  Created by Ekaterina Tarasova on 26.03.2021.
 //
 
 import SwiftUI
 
 @main
-struct app_stockApp: App {
+struct stockApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import RealmSwift
+
 
 //MARK: Stock View
 
@@ -109,19 +111,18 @@ struct Stocks: View {
                     DispatchQueue.main.async {
                         // update our UI
                         self.stock = decodedResponse.quotes
+                        
                     }
                     return
                 }
             }
             print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
         }.resume()
-        
     }
     
     func stockSearchText() -> [Stock] {
         return stock.filter({ text.isEmpty ? true : $0.longName.contains(text) })
     }
-    
 }
 
 

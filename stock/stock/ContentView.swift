@@ -73,6 +73,7 @@ struct Stock: Codable, Hashable{
     var regularMarketPrice: Double
     var regularMarketDayRange: String
     
+    
 }
 
 
